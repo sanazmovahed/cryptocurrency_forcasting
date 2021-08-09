@@ -11,6 +11,7 @@ def readData(dataset_file_name, validation_percent, test_percent, FUTURE_PERIOD_
     x_train, y_train, x_validation, y_validation, x_test, y_test = ([] for i in range(6))
     
     data = pd.read_csv(dataset_file_name, delimiter=',')[1:]
+    
     # Sort data in Desc order from old to new
     data = data.iloc[::-1]
     
@@ -20,15 +21,16 @@ def readData(dataset_file_name, validation_percent, test_percent, FUTURE_PERIOD_
     # print(data[['close', 'future', 'target']].head(10))
 
     # Add day of week as a field
-    date_time = pd.to_datetime(data['unix'], unit='s', errors='coerce')
-    data['Day of Week'] = date_time.dt.day_name()
+    data['date'] = pd.to_datetime(data['date'], format='%Y/%m/%d', errors='coerce', infer_datetime_format=True)
+
+    data['Day of Week'] = data['date'].dt.day_name()
+    print(data)
     
     # Drop the columns should not include in dataset
     data = data.drop(['unix', 'date', 'tradecount', 'symbol', 'Volume BTC', 'Volume USDT', 'future'], axis=1)
     
     # Normalization stage of features
     data = normalize(data)   
-    print(data)
    
     test_percent /= 100
     validation_percent /= 100
