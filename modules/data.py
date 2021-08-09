@@ -4,6 +4,8 @@ def readData(dataset_file_name, validation_percent, test_percent, FUTURE_PERIOD_
     import numpy as np
     import pandas as pd  
     from classify import classify
+    from normalization import normalize
+    from sklearn import preprocessing  # for normalization of data
     
     
     x_train, y_train, x_validation, y_validation, x_test, y_test = ([] for i in range(6))
@@ -16,9 +18,17 @@ def readData(dataset_file_name, validation_percent, test_percent, FUTURE_PERIOD_
     data['future'] = data['close'].shift(-FUTURE_PERIOD_PREDICT)
     data['target'] = list(map(classify, data['close'], data['future']))
     # print(data[['close', 'future', 'target']].head(10))
+
+    # Add day of week as a field
+    date_time = pd.to_datetime(data['unix'], unit='s', errors='coerce')
+    data['Day of Week'] = date_time.dt.day_name()
     
     # Drop the columns should not include in dataset
     data = data.drop(['unix', 'date', 'tradecount', 'symbol', 'Volume BTC', 'Volume USDT', 'future'], axis=1)
+    
+    # Normalization stage of features
+    data = normalize(data)   
+    print(data)
    
     test_percent /= 100
     validation_percent /= 100
