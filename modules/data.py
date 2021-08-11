@@ -22,7 +22,7 @@ def readData(dataset_file_name, validation_percent, test_percent, FUTURE_PERIOD_
 
     # Add day of week as a field
 #     data['date'] = pd.to_datetime(data['date'], infer_datetime_format=True) # , format='%Y/%m/%d-%H' 
-    data['unix'] = pd.to_datetime(data['unix'], format='%Y/%m/%d-%H', infer_datetime_format=True) # , errors='coerce'
+    data['unix'] = pd.to_datetime(data['unix'], unit="s", infer_datetime_format=True) # , errors='coerce'
     
     data['Day of Week'] = data['unix'].dt.day_name()
     data['Hour of Day'] = data['unix'].dt.hour
