@@ -7,7 +7,7 @@
 def normalize(df):
     result = df.copy()
     for col in df.columns:
-        if col != "target" and col != "Day of Week":
+        if col != "target" and col != "Day of Week" and col != "Hour of Day":
             max_value = df[col].max()
             min_value = df[col].min()
             result[col] = (df[col] - min_value) / (max_value - min_value)
