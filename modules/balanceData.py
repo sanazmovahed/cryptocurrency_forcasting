@@ -47,5 +47,3 @@ def balance_data(data, SEQ_LEN):
         
     return np.array(x), y    
     
-#     return sequential_data
-
