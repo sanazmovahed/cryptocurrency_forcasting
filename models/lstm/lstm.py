@@ -1,6 +1,6 @@
 def lstm(x_train):
-    from tensorflow.keras.models import Sequential
-    from tensorflow.keras.layers import Dense, Dropout, LSTM, BatchNormalization
+    from keras.models import Sequential
+    from keras.layers import Dense, Dropout, LSTM, BatchNormalization
     
     model = Sequential()
     model.add(LSTM(128, input_shape=(x_train.shape[1:]), return_sequences=True))

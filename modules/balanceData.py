@@ -6,7 +6,6 @@ def balance_data(data, SEQ_LEN):
     # Sequencing data in the order
     sequential_data = []
     prev_days = deque(maxlen=SEQ_LEN)
-    print("prev_days: {}".format(prev_days))
     
     # create an array of x and y for all sequential data
     for i in data:
@@ -45,5 +44,5 @@ def balance_data(data, SEQ_LEN):
         x.append(seq)
         y.append(target)
         
-    return np.array(x), y    
+    return np.array(x), np.array(y)    
     

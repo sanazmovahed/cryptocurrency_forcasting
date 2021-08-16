@@ -1,6 +1,6 @@
 def gru(x_train):
-    from tensorflow.keras.models import Sequential
-    from tensorflow.keras.layers import Dense, Dropout, GRU, BatchNormalization
+    from keras.models import Sequential
+    from keras.layers import Dense, Dropout, GRU, BatchNormalization
 
     model = Sequential()
     model.add(GRU(128, 

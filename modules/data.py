@@ -19,7 +19,6 @@ def readData(dataset_file_name, FUTURE_PERIOD_PREDICT):
     # Create binary targets targets
     data['future'] = data['close'].shift(-FUTURE_PERIOD_PREDICT)
     data['target'] = list(map(classify, data['close'], data['future']))
-    # print(data[['close', 'future', 'target']].head(10))
     
     # Add day of week as a field
     date_time = pd.Series(data['unix'])
@@ -31,14 +30,10 @@ def readData(dataset_file_name, FUTURE_PERIOD_PREDICT):
             b = int(num)
         temp.append(time.ctime(b))
     data['unix'] = temp
-    
     data['unix'] = pd.to_datetime(data['unix'], format='%Y/%m/%d-%H' , infer_datetime_format=True) # , errors='coerce'
-    
     data['Day of Week'] = data['unix'].dt.weekday
     data['Hour of Day'] = data['unix'].dt.hour
-    
-    print(data, data.info())    
-    
+        
     # Drop the columns should not include in dataset
     data = data.drop(['unix', 'date', 'tradecount', 'symbol', 'Volume BTC', 'Volume USDT', 'future'], axis=1)
     
