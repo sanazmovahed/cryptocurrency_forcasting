@@ -10,20 +10,15 @@ def plotter(history):
 
     epochs = range(1, len(acc) + 1)
     
-    fig, axs = plt.subplots(2, 2, figsize=(12,12))
-    axs[0, 0].plot(epochs, loss_values, 'bo', label='Train loss')
-    axs[0, 0].plot(epochs, val_loss_values, 'b', label='Val loss')
-    axs[0, 0].set_title('Train/val loss')
-    axs[0, 0].set_xlabel('Epochs')
-    axs[0, 0].set_ylabel('Loss')
-    
-    axs[0, 1].plot(epochs, acc, 'bo', label='Train Acc')
-    axs[0, 1].plot(epochs, val_acc_values, 'b', label='Val Acc')
-    axs[0, 1].set_title('Train/val Accuracy')
-    axs[0, 1].set_xlabel('Epochs')
-    axs[0, 1].set_ylabel('Accuracy')
-    
+    plt.subplots(figsize=(15, 7))
+    plt.plot(epochs, loss_values, label='Loss')
+    plt.plot(epochs, val_loss_values, 'r', label='Validation Loss')
     plt.legend()
     plt.show()
+
+    plt.subplots(figsize=(15, 7))
+    plt.plot(epochs,acc_values, label='Accuracu')
+    plt.plot(epochs, val_acc_values, 'r', label='Validation Accuracy')
+    plt.legend()
 
     return True
